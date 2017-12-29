@@ -1,0 +1,90 @@
+/*  <!-- RESPONSIVE
+============================================ --> */
+// здесь мы пишем медиа запросы 
+
+// minw start 
+$minw992: 992px;
+$minw768: 768px;
+$minw480: 480px;
+// minw end 
+
+// maxw start 
+$maxw1199: 1199px;
+$maxw991: 991px;
+$maxw767: 767px;
+$maxw479: 479px;
+// maxw end 
+
+
+// =============================================================================
+
+
+/* <!-- minw start
+	============================================ --> */
+
+
+	@media only screen and (min-width:$minw992){
+		.test{
+			display: block;
+		}
+	}/* <!-- $minw992 --> */
+
+	
+	@media only screen and (min-width:$minw768){
+		
+	}/* <!-- $minw768 --> */
+
+
+	@media only screen and (min-width:$minw480){
+		.test{
+			display: flex;
+		}
+	}/* <!-- $minw480 --> */
+
+
+/* <!-- minw end 
+	============================================ --> */
+
+
+
+
+/* <!-- maxw start
+	============================================ --> */
+
+
+	@media only screen and (max-width:$maxw1199){
+		.test{
+			display: block;
+		}
+	}/* <!-- $maxw1199 --> */
+
+
+	@media only screen and (max-width:$maxw991) {
+		.test2{
+			display: block;
+		}
+	}/* <!-- $maxw991 --> */
+
+
+	@media only screen and (max-width:$maxw767) {
+		.test3{
+			display: block;
+		}
+		body{
+			background: red;
+		}
+	}/* <!-- $maxw767 --> */
+
+
+	@media only screen and (max-width:$maxw479) {
+		.test4{
+			display: block;
+		}
+	}/* <!-- $maxw479 --> */
+
+ 
+/* <!-- maxw end 
+	============================================ --> */
+
+
+

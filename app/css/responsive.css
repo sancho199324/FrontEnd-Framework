@@ -1,0 +1,71 @@
+/*  <!-- RESPONSIVE
+============================================ --> */
+
+/* <!-- minw start
+	============================================ --> */
+
+@media only screen and (min-width: 992px) {
+  .test {
+    display: block;
+  }
+}
+
+/* <!-- $minw992 --> */
+
+/* <!-- $minw768 --> */
+
+@media only screen and (min-width: 480px) {
+  .test {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+/* <!-- $minw480 --> */
+
+/* <!-- minw end 
+	============================================ --> */
+
+/* <!-- maxw start
+	============================================ --> */
+
+@media only screen and (max-width: 1199px) {
+  .test {
+    display: block;
+  }
+}
+
+/* <!-- $maxw1199 --> */
+
+@media only screen and (max-width: 991px) {
+  .test2 {
+    display: block;
+  }
+}
+
+/* <!-- $maxw991 --> */
+
+@media only screen and (max-width: 767px) {
+  .test3 {
+    display: block;
+  }
+
+  body {
+    background: red;
+  }
+}
+
+/* <!-- $maxw767 --> */
+
+@media only screen and (max-width: 479px) {
+  .test4 {
+    display: block;
+  }
+}
+
+/* <!-- $maxw479 --> */
+
+/* <!-- maxw end 
+	============================================ --> */

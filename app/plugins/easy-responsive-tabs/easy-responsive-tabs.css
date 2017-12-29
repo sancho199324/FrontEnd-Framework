@@ -1,0 +1,42 @@
+.resp-tabs-list li {
+    
+}
+
+h2.resp-accordion {
+    display: none;
+}
+
+.resp-tab-content {
+    display: none;
+}
+
+.resp-content-active, 
+.resp-accordion-active {
+    display: block;
+}
+
+.resp-easy-accordion  h2.resp-accordion {
+    display: block;
+}
+
+.resp-tab-content-active {
+    display: block;
+}
+
+
+@media only screen and (max-width: 768px) {
+
+    ul.resp-tabs-list {
+        display: none;
+    }
+
+    h2.resp-accordion {
+        display: block;
+    }
+
+
+    .resp-accordion-closed {
+        display:none !important;
+    }
+
+}

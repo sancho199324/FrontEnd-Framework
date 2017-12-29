@@ -1,0 +1,54 @@
+@charset "UTF-8";
+/*====>>  Stylesheet Guide START  <<====*/
+        
+
+        /*<<=========================================>>
+
+        1. IMPORT Plugins and other CSS files
+        2. DEFAULT Stylesheets
+        3. BASIC classes
+            3.1.      TOUCH hacks
+            3.2.      Float:;
+            3.3.      Text-align:;
+            3.4.      INDENTS Zero
+            3.5.      Absolute positions
+            3.6.      Clearfix
+            3.7.      Dispay:;
+            3.8.      LINKS
+            3.9.      LINKS:hover
+            3.10.     TITLES
+            3.11.     BACKGROUNDS
+            3.12.     COLORS
+            3.13.     FONTS
+            3.14.     TEXTAFIELD (placeholder animation)
+            3.15.     BREADCRUMBS
+            3.16.     PRELOADER
+            3.17.     ANCHOR TO TOP
+        4. HEADER
+        5. CONTENT
+        6. FOOTER 
+        
+        <<=========================================>>*/
+        
+
+/*====>>  Stylesheet Guide END    <<====*/
+
+
+/*  <!-- 1. IMPORT Plugins and other CSS files 
+============================================ --> */
+@import "app/scss/lib/_import";
+/*  <!-- 3. BASIC classes
+============================================ --> */
+@import "app/scss/lib/_main";
+/*  <!-- 4. HEADER 
+============================================ --> */
+@import "app/scss/lib/_header";
+/*  <!-- 5. CONTENT 
+============================================ --> */
+@import "app/scss/lib/_content";
+/*  <!-- 6. FOOTER 
+============================================ --> */
+@import "app/scss/lib/_footer";
+// /*  <!-- RESPONSIVE
+// ============================================ --> */
+// @import "app/scss/lib/_responsive";
