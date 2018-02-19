@@ -1,10 +1,13 @@
 'use strict';
-// чтобы установить сразу все плагины - нужно ввести npm install
+
+// Если нужно установить плагины - пробуем установить их с помощью одной стороки которая написана ниже (надеюсь у вас сработает !!!!).
+// npm install gulp gulp-sass gulp-rename gulp-minify-css browser-sync gulp-imagemin gulp-watch gulp-wait gulp-pug gulp-util gulp-autoprefixer del gulp-uglify --save-dev 
+
 
 //Init Plugins
 var gulp  			= require('gulp'), //npm install --global gulp-cli   ,  npm install --save-dev gulp
-	concatCSS 		= require('gulp-concat-css'), // npm install --save-dev gulp-concat-css
 	sass 			= require('gulp-sass'), // npm install gulp-sass --save-dev
+	cssbeautify 	= require('gulp-cssbeautify'), // npm install --save-dev gulp-cssbeautify
 	rename 			= require('gulp-rename'), // npm install --save-dev  gulp-rename
 	minifyCSS 		= require('gulp-minify-css'), // npm install --save-dev  gulp-minify-css
 	browserSync 	= require('browser-sync'), // npm install browser-sync --save-dev
@@ -12,173 +15,265 @@ var gulp  			= require('gulp'), //npm install --global gulp-cli   ,  npm install
 	watch 			= require('gulp-watch'), // npm install --save-dev gulp-watch
 	wait 			= require('gulp-wait'), // npm install --save-dev gulp-wait
 	pug 			= require('gulp-pug'), // npm install --save-dev gulp-pug
+	prettify 		= require('gulp-prettify'), // npm install --save-dev gulp-prettify
+	cached 			= require('gulp-cached'), // npm install gulp-cached --save-dev
 	gutil 			= require('gulp-util'), // npm install --save-dev gulp-util
 	autoprefixer 	= require('gulp-autoprefixer'), // npm install --save-dev gulp-autoprefixer
-	zip 			= require('gulp-zip'), // npm install --save-dev gulp-zip
+	del 			= require('del'), // npm install --save-dev del
+	vinylFtp 		= require( 'vinyl-ftp'), // npm install --save-dev vinyl-ftp
+	plumber 		= require('gulp-plumber'), // npm install --save-dev gulp-plumber
+    zip             = require('gulp-zip'), // npm install --save-dev gulp-zip
 	uglify 			= require('gulp-uglify'); // npm install --save-dev gulp-uglify
 
+var path = {
 
+	//Тут мы укажем куда складывать готовые после сборки файлы
+	build: {
+		buildPath: 'build/**/*',
+		htmlPath: 'build/',
+        jsPath: 'build/js/',
+        jsMinPath: 'build/js/min/',
+        pluginsPath: 'build/plugins/',
+        cssPath: 'build/css/',
+        minCssPath: 'build/css/min/',
+        scssPath: 'build/scss/',
+        imagesPath: 'build/images/',
+        fontsPath: 'build/fonts/',
+	},
+
+	src: {
+		srcPath: 'app',
+		htmlPath: 'app/*.html', 
+		allPug: 'app/pug/**/*.pug',
+		pugPath: 'app/pug/*.pug', 
+        allJsPath: 'app/js/**/*.js',
+        pluginsPath: 'app/plugins/**/*.*',
+        scssPath: 'app/scss/**/*.scss',
+        cssPath: 'app/css/**/*.css',
+        cssGlobalPath: 'app/css',
+        imagesPath: 'app/images/**/*.*',
+        fontsPath: 'app/fonts/**/*.*',
+        jsPath: [
+        	'app/js/**/*.js',
+        	'!app/js/**/*min.js'
+        ]
+	}
+
+};
 
 
 //<!--  Pug Task        ============================================ -->
-gulp.task('pug', function buildHTML() {
-  return gulp.src('app/pug/*.pug')
-    .pipe(pug({
-      pretty: true
-    }))
-    .pipe(gulp.dest('app'))
-	.pipe(browserSync.reload({stream: true}))
-	.on('end', function(){ gutil.log(' - - - - - - - - - - - - - Pug converted to HTML Succesfully! - - - - - - - - - - - - - '); })
-	.on('error', gutil.log);
-});
-
+	gulp.task('pug', function buildHTML() {
+	  	return gulp.src(path.src.pugPath)
+	  	//.pipe(plumber({
+	    //  errorHandler: onError
+	    //}))
+	  	.pipe(plumber(function(error) {
+			gutil.log(gutil.colors.red(error.message));
+			this.emit('end');
+		}))
+		.pipe(pug({
+			pretty: true
+		}))
+		.pipe(prettify({
+			indent_size: 4
+		}))
+	  	.pipe(cached('pug'))
+		.pipe(gulp.dest(path.src.srcPath))
+		.pipe(browserSync.reload({stream: true}))
+		.on('end', function(){ gutil.log(' - - - - - - - - - - - - - Pug converted to HTML Succesfully! - - - - - - - - - - - - - '); })
+		.on('error', gutil.log);
+	});
 
 //<!--  SCss Task        ============================================ -->
-gulp.task('scss', function () {
-	return gulp.src([
-	    'app/scss/**/*.scss',
-	    '!app/scss/**/responsive.scss' 
-	])
-	.pipe(wait(500))
-	.pipe(sass().on('error', sass.logError))
-	.pipe(autoprefixer({
-        browsers: ['last 16 versions'], // 'last 2 versions'
-        cascade: false
-    }))
-	.pipe(concatCSS("style.css"))
-	.pipe(gulp.dest('app/css'))
-	.pipe(browserSync.reload({stream: true}))
-	.pipe(minifyCSS(''))
-	.pipe(rename({suffix: '.min'}))
-	.pipe(gulp.dest('app/css'))
-	.pipe(browserSync.reload({stream: true}))
-	.on('end', function(){ gutil.log(' - - - - - - - - - - - - - Styles Complete! - - - - - - - - - - - - - '); })
-	.on('error', gutil.log);
-});
+	gulp.task('scss', function () {
+		return gulp.src(path.src.scssPath)
+		.pipe(plumber(function(error) {
+			gutil.log(gutil.colors.red(error.message));
+			this.emit('end');
+		}))
+		.pipe(wait(500))
+		.pipe(sass().on('error', sass.logError))
+		.pipe(cached('scss'))
+		.pipe(cssbeautify({
+            indent: '  ',
+            openbrace: 'end-of-line',
+            autosemicolon: true
+        }))
+		.pipe(gulp.dest(path.src.cssGlobalPath))
+		.pipe(browserSync.reload({stream: true}))
+		.on('end', function(){ gutil.log(' - - - - - - - - - - - - - Styles Complete! - - - - - - - - - - - - - '); })
+		.on('error', gutil.log);
+	});
 
 
+//<!--  Js Task        ============================================ -->
+	gulp.task('js', function () {
+		return gulp.src(path.src.jsPath) 
+		.pipe(plumber(function(error) {
+			gutil.log(gutil.colors.red(error.message));
+			this.emit('end');
+		}))
+		//.pipe(gulp.dest(path.src.jsPath)) 
+		.pipe(browserSync.reload({stream: true}))
+		.on('end', function(){ gutil.log(' - - - - - - - - - - - - - Js Complete! - - - - - - - - - - - - - '); })
+		.on('error', gutil.log);
+	});
 
-//<!--  Responsive Css Task        ============================================ -->
-gulp.task('css', function (done) {
-	return gulp.src([
-	    'app/scss/**/responsive.scss'
-	])
-	.pipe(wait(500))
-	.pipe(sass().on('error', sass.logError))
-	.pipe(autoprefixer({
-        browsers: ['last 16 versions'], // 'last 2 versions'
-        cascade: false
-    }))
-	.pipe(concatCSS("responsive.css"))
-	.pipe(gulp.dest('app/css'))
-	.pipe(browserSync.reload({stream: true}))
-	.pipe(minifyCSS(''))
-	.pipe(rename({suffix: '.min'}))
-	.pipe(gulp.dest('app/css'))
-	.pipe(browserSync.reload({stream: true}))
-	.on('end', function(){ gutil.log(' - - - - - - - - - - - - - Responsive Css Styles Complete! - - - - - - - - - - - - - '); })
-	.on('error', gutil.log);
-});
-
-
-//<!--  Compress image Task        ============================================ -->
-gulp.task('compress', function() {
-	gulp.src('app/images/**/*.*')
-	.pipe(imagemin({
-		interlaced: true,
-		progressive: true,
-		optimizationLevel: 5,
-		svgoPlugins: [{removeViewBox: true}]
-	}))
-	.pipe(gulp.dest('production/images'));
-});
-
-
-//<!--  JS Task        ============================================ -->
-gulp.task('js', function () {
-	return gulp.src([
-		'app/js/script.core.js',
-		'app/js/script.init.js'
-	])
-	.pipe(uglify())
-	.pipe(rename({suffix: '.min'}))
-	.pipe(gulp.dest('app/js/min/'))
-	.pipe(browserSync.reload({stream: true}))
-	.on('end', function(){ gutil.log(' - - - - - - - - - - - - - Js watch Complete! - - - - - - - - - - - - - '); })
-	.on('error', gutil.log);
-});
+//<!--  Plugins Task        ============================================ -->
+	gulp.task('plugins', function () {
+		return gulp.src(path.src.pluginsPath)
+		.pipe(plumber(function(error) {
+			gutil.log(gutil.colors.red(error.message));
+			this.emit('end');
+		}))
+		//.pipe(gulp.dest(path.src.pluginsPath))
+		.pipe(browserSync.reload({stream: true}))
+		.on('end', function(){ gutil.log(' - - - - - - - - - - - - - Plugins Complete! - - - - - - - - - - - - - '); })
+		.on('error', gutil.log);
+	});
 
 
 //<!--  BrowserSync server Task        ============================================ -->
-gulp.task('browser-sync', function() { // Создаем таск browser-sync
-    browserSync({ // Выполняем browser Sync
-        server: { // Определяем параметры сервера
-            baseDir: 'app' // Директория для сервера - app
-        },
-        notify: false // Отключаем уведомления
-    });
-});
+	gulp.task('browser-sync', function() { // Создаем таск browser-sync
+	    browserSync({ // Выполняем browser Sync
+	        server: { // Определяем параметры сервера
+	            baseDir: 'app' // Директория для сервера - app
+	        },
+	        notify: false // Отключаем уведомления
+	    });
+	});
 
 
-//<!--  Default Task        ============================================ -->
-gulp.task('default', ['browser-sync', 'scss', 'css', 'pug'], function() {
-	
-	gulp.watch([
-	    'app/pug/*.pug'
-	], ['pug']);
+//<!--  Delete build folder        ============================================ -->
+	gulp.task('delete', function(){
+		return del.sync('build');
+	});
 
-	gulp.watch([
-	    'app/scss/**/*.scss',
-	    '!app/scss/**/responsive.scss' 
-	], ['scss']);
 
-	gulp.watch([
-	    'app/scss/**/responsive.scss'
-	], ['css']);
+//<!--  Default Watch Task        ============================================ -->
+	gulp.task('default', ['browser-sync', 'scss', 'pug'], function() {  
+		
+		gulp.watch([path.src.scssPath], ['scss']); 
 
-	gulp.watch([
-	    'app/js/*.js'
-	], ['js'],);
+		gulp.watch([path.src.pugPath], ['pug']); 
 
-});
+		gulp.watch([path.src.allJsPath], ['js']); 
+
+		gulp.watch([path.src.pluginsPath], ['plugins']);
+
+	});
+
+//<!--  DEPLOY         ============================================ -->
+gulp.task( 'deploy', function () {
+ 
+    var conn = vinylFtp.create( {
+		host:     'shamriko.ftp.ukraine.com.ua',
+        user:     'shamriko_alex',
+        password: '4vY51ZuyK8',
+        parallel: 10,
+        log:      gutil.log
+    } );
+ 
+    var globs = [
+        'build/**'
+    ];
+ 
+    // using base = '.' will transfer everything to /public_html correctly
+    // turn off buffering in gulp.src for best performance
+ 
+    return gulp.src( globs, { base: '.', buffer: false } )
+        .pipe( conn.newer( '/public_html/projects/project_name' ) ) // only upload newer files
+        .pipe( conn.dest( '/public_html/projects/project_name' ) );
+ 
+} );
 
 
 //<!--  Build Task        ============================================ -->
-// Когда проект полностью готов - вызываем таск ( gulp build ) - он создает папку production и заливает готовый проект внутрь папки. 
-gulp.task('build', ['compress'], function () { 
-    
-    // css
-    var buildCss = gulp.src('app/css/**/*.css')
-	.pipe(gulp.dest('production/css'));
+    // Когда проект полностью готов - вызываем таск ( gulp build ) - он создает папку build и заливает готовый проект внутрь папки. 
 
-	// scss
-    var buildSCss = gulp.src('app/scss/**/*.scss')
-	.pipe(gulp.dest('production/scss'));
+    // Html build
+    gulp.task('html:build', function () {  
+        gulp.src(path.src.htmlPath)  
+        .pipe(gulp.dest(path.build.htmlPath));
+    });
 
-	//fonts
-	var buildFonts = gulp.src('app/fonts/**/*')
-	.pipe(gulp.dest('production/fonts'));
+    // Js build
+    gulp.task('js:build', function () {
+        gulp.src(path.src.allJsPath) 
+        .pipe(gulp.dest(path.build.jsPath));
+    });
 
-	//js
-	var buildJS = gulp.src('app/js/**/*')
-	.pipe(gulp.dest('production/js'));
+    // MinJs build
+    gulp.task('minjs:build', function () {
+        gulp.src(path.src.jsPath)
+            .pipe(uglify())
+            .pipe(rename({suffix: '.min'}))
+        .pipe(gulp.dest(path.build.jsMinPath));
+    });
 
-	//plugins
-	var buildPluginsJS = gulp.src('app/plugins/**/*')
-	.pipe(gulp.dest('production/plugins/'));
+    // Plugins build
+    gulp.task('plugins:build', function () {
+        gulp.src(path.src.pluginsPath) 
+        .pipe(gulp.dest(path.build.pluginsPath)); 
+    });
 
-	//html
-	var buildHtml = gulp.src('app/*.html')
-	.pipe(gulp.dest('production/'));
+    // Images min build
+    gulp.task('images:build', function () {
+            gulp.src(path.src.imagesPath)
+            .pipe(imagemin({
+                    interlaced: true,
+                    progressive: true,
+                    optimizationLevel: 5,
+                    svgoPlugins: [{removeViewBox: true}]
+            }))
+            .pipe(gulp.dest(path.build.imagesPath));
+    });
 
-});
+    // Fonts build
+    gulp.task('fonts:build', function() {
+        gulp.src(path.src.fontsPath)
+        .pipe(gulp.dest(path.build.fontsPath));
+    });
 
+    // Scss build
+    gulp.task('scss:build', function() {
+        gulp.src(path.src.scssPath) 
+        .pipe(gulp.dest(path.build.scssPath)); 
+    });
+
+    // Css build
+    gulp.task('css:build', function() {
+        gulp.src(path.src.cssPath) 
+        .pipe(autoprefixer({
+            //browsers: ['last 15 versions','> 1%', 'ie 8', 'ie 7'],
+            //cascade: true
+            browsers: ['last 16 versions'], // 'last 2 versions'
+            cascade: true // false
+        }))
+        .pipe(gulp.dest(path.build.cssPath)) 
+        .pipe(minifyCSS(''))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(gulp.dest(path.build.minCssPath));
+    });
+
+    gulp.task('build', [
+        'delete',
+        'html:build',
+        'js:build',
+        'minjs:build',
+        'plugins:build',
+        'scss:build',
+        'css:build',
+        'fonts:build',
+        'images:build'
+    ]);
 
 
 //<!--  ZIP Task        ============================================ -->
 // Если проект нужно заархивировать - в консоли прописываем таск ( gulp zip ) - он берет нашу готовую папку production и архивирует ее.
 gulp.task('zip', function () {
-    gulp.src('production/**')
-    .pipe(zip('production.zip'))
-    .pipe(gulp.dest('production zip file'))
+    gulp.src('build/**')
+    .pipe(zip('build.zip'))
+    .pipe(gulp.dest('build zip file'))
 });

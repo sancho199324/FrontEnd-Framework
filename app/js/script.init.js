@@ -1,43 +1,3 @@
-// ЕСЛИ ПРОЕКТ РЕСПОНСИВ ТО ВСЕ ЧТО ВЫШЕ НУЖНО РАССКОМЕНТИРОВАТЬ. СКРИПТ ВЫШЕ ПРЕДНАЗНАЧЕН ДЛЯ КОРРЕКТНОГО ОТОБРАЖЕНИЯ ВЕРСТКИ ПРИ СМЕНЕ ОРИЕНТАЦИИ НА ДЕВАЙСАХ СТАРТ
-		
-		// $(function(){
-		// 	var viewportmeta = document.querySelector && document.querySelector('meta[name="viewport"]'),
-		// 	ua = navigator.userAgent,
-
-		// 	gestureStart = function () {viewportmeta.content = "width=device-width, minimum-scale=0.25, maximum-scale=1.6";},
-
-		// 	scaleFix = function () {
-		// 		if (viewportmeta && /iPhone|iPad/.test(ua) && !/Opera Mini/.test(ua)) {
-		// 			viewportmeta.content = "width=device-width, minimum-scale=1.0, maximum-scale=1.0";
-		// 			document.addEventListener("gesturestart", gestureStart, false);
-		// 		}
-		// 	};
-			
-		// 	scaleFix();
-		// });
-		// var ua=navigator.userAgent.toLocaleLowerCase(),
-		//  regV = /ipod|ipad|iphone/gi,
-		//  result = ua.match(regV),
-		//  userScale="";
-		// if(!result){
-		//  userScale=",user-scalable=0"
-		// }
-		// document.write('<meta name="viewport" id="myViewport" content="width=device-width,initial-scale=1.0'+userScale+'">')
-
-		// ============================================================
-		//  window.onload = function () {
-		// 	if(screen.width <= 617) {
-		// 	    var mvp = document.getElementById('myViewport');
-		// 	    mvp.setAttribute('content','width=617');
-		// 	}
-		// }
-		// ============================================================
-
-// ЕСЛИ ПРОЕКТ РЕСПОНСИВ ТО ВСЕ ЧТО ВЫШЕ НУЖНО РАССКОМЕНТИРОВАТЬ. СКРИПТ ВЫШЕ ПРЕДНАЗНАЧЕН ДЛЯ КОРРЕКТНОГО ОТОБРАЖЕНИЯ ВЕРСТКИ ПРИ СМЕНЕ ОРИЕНТАЦИИ НА ДЕВАЙСАХ КОНЕЦ
-
-
-
-
 //  /*================================================>  
 //                                 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  INCLUDE AND INITIALIZE Plugins START  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 //  <================================================*/
@@ -46,22 +6,20 @@
 
 
 
-		var sticky = $(".sticky"),
-			tabs = $('.tabs'),
-			maxhheight = $("[data-mh]"),
-			validate   = $('.validate'),
-			mask	   = $('input[type="tel"]'),
-		    styler = $(".styler"),
-		    owl = $(".owl-carousel"),
-		    flex = $(".flexslider"),
+		var sticky 		= $(".sticky"),
+			tabs 		= $('.tabs'),
+			maxhheight 	= $("[data-mh]"),
+			validate   	= $('.validate'),
+			mask	   	= $('input[type="tel"]'),
+		    styler 		= $(".styler"),
+		    owl 		= $(".owl-carousel"),
+		    flex 		= $(".flexslider"),
 		    royalslider = $(".royalslider"),
-		    tooltip    = $('.tooltip_btn'),
-			wow = $(".wow"),
-			popup = $("[data-popup]"),
+		    tooltip    	= $('.tooltip_btn'),
+			wow 		= $(".wow"),
+			popup 		= $("[data-popup]"),
 			map 	  	= $('.gmap'),
-			mapYa		=$('.ymap'),
-			windowW = $(window).width(),
-			windowH = $(window).height();
+			mapYa		= $('.ymap');
 
 
 			// if(sticky.length){
@@ -79,6 +37,7 @@
 			// }
 			// if(tabs.length){
 			// 		include("plugins/easy-responsive-tabs/easyResponsiveTabs.js");
+			// 		includeCss("plugins/easy-responsive-tabs/easyResponsiveTabs.css");
 			// }
 			// if(wow.length){
 			// 		include("plugins/animation/wow.min.js");
@@ -118,6 +77,23 @@
 			function include(url){ 
 
 					document.write('<script src="'+ url + '"></script>'); 
+
+			}
+
+			function includeCss(href){
+
+					var href = '<link rel="stylesheet" media="screen" href="' + href +'">';
+
+					if($("[href*='style.css']").length){
+
+						$("[href*='style.css']").before(href);
+
+					}
+					else{
+
+						$("head").append(href);
+
+					}
 
 			}
 

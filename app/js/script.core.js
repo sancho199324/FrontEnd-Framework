@@ -24,6 +24,7 @@
 			// self.tabs();
 			// self.includeScipts.init();
 			// self.mapYa();
+			self.tel.init();
 		},
 
 		windowLoad: function(){
@@ -41,6 +42,49 @@
 			// }
 			
 		},
+
+		tel: {
+
+			init: function(){
+
+				var self = this;
+					self.telephone = $('.js-tel-hide');
+
+				self.changeNumber();
+
+			},
+
+			changeNumber: function(){
+				
+				var self = this;
+
+				self.telephone.each(function(index, el) {
+            		
+	            	var telNumber = $(this).text(),
+	            	telDel = telNumber.substring( 0, telNumber.length - 2 ),
+	            	appendSpan = "<span class='js-wrap-tel' data-number='"+ telNumber +"'></span>",
+					appendText = "<span class='js-show_tel'>Показать номер</span><span class='two_dots'></span>";
+
+
+
+	            	$(this).text(telDel);
+	            	$(this).wrap(appendSpan).closest('.js-wrap-tel').append(appendText);
+
+					
+	            	$('.js-show_tel').on('click', function(event) {
+						event.preventDefault();
+						// self.dataNumb = $(this).closest('.js-wrap-tel').attr('data-number');
+						
+						// $(this).closest('.js-wrap-tel').find('.js-tel-hide').text(self.dataNumb);
+						$(this).closest('.js-wrap-tel').find('.js-tel-hide').text(telNumber);
+						$(this).closest('.js-wrap-tel').addClass('active').find('.js-show_tel, .two_dots').remove();
+
+					});
+	            });
+
+			}
+
+        },
 
 		// Масштабирование сайта  (scale) START
 		// var elm = document.getElementById('all'); // all -- элемент, в который был обернут весь сайт

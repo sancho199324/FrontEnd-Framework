@@ -1,7 +1,12 @@
 extends ../pug/templates/main
 
-block title
-	title Главная страница
+block vars
+	- var title = "Главная страница";
+	- var headerClasses = ['header1'];
+	- var footerClasses = ['footer1'];
+
+//- block title
+//- 	| Главная страница
 
 
 //- Content Start     ============================================ 
@@ -11,8 +16,22 @@ block content
 
 	// Content Start     ============================================ 
 
-	main#content.content1
+	main#content
 
+		section.breadcrumbs_container
+			.container
+				.row
+					.col-xs-12
+						ul.breadcrumbs.clearfix
+							li.breadcrumbs_it(data-bread-arr!="&#8250;")
+								a(href="javascript:;" title="Перейти на главную страницу")
+									span.breadcrumbs_current Главная
+							li.breadcrumbs_it(data-bread-arr!="&#8250;")
+								a(href="javascript:;" title="Перейти на страницу О нас")
+									span.breadcrumbs_current О нас
+							li.breadcrumbs_it(data-bread-arr!="&#8250;")
+								span.breadcrumbs_current О нас
+								
 		// - - - - - - - - - - - - - something_container - - - - - - - - - - - - - - - - 
 
 		section(class="something_container")
@@ -20,16 +39,13 @@ block content
 				a( href="#" data-popup="#box-modal" style=" font-family: 'Raleway';") Popup
 				
 				div.box
-					div.box-item.item-1 1  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia id, obcaecati nostrum sequi quas recusandae ratione suscipit praesentium voluptates, quisquam repellat et? Aperiam perferendis eum quod quo praesentium, quisquam rem!
-					div.box-item.item-2 2  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, corrupti, assumenda. Debitis ut perferendis sapiente id ad eligendi iure dolore consequatur ducimus delectus! Illo facilis odit, a repudiandae hic nam.
-					div.box-item.item-3 3  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus necessitatibus, asperiores nulla, eaque dolores recusandae adipisci deleniti vero similique laboriosam sint porro dolorem reprehenderit, eligendi ipsam, ducimus nobis temporibus doloribus!
-					div.box-item.item-4 4  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique ipsa suscipit, consequatur incidunt, quod pariatur libero quae! Quae, ducimus iste impedit consectetur incidunt, quod fugit sed, molestiae necessitatibus expedita quo!
-					div.box-item.item-5 5  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, voluptates doloremque mollitia adipisci vero ea delectus dolor nulla aliquid? Sapiente odit magnam eveniet eius est enim natus impedit soluta itaque!
-					div.box-item.item-6 6  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, voluptates doloremque mollitia adipisci vero ea delectus dolor nulla aliquid? Sapiente odit magnam eveniet eius est enim natus impedit soluta itaque!
-					div.box-item.item-7 7  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, voluptates doloremque mollitia adipisci vero ea delectus dolor nulla aliquid? Sapiente odit magnam eveniet eius est enim natus impedit soluta itaque!
-					div.box-item.item-4 4  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique ipsa suscipit, consequatur incidunt, quod pariatur libero quae! Quae, ducimus iste impedit consectetur incidunt, quod fugit sed, molestiae necessitatibus expedita quo!
-					div.box-item.item-5 5  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, voluptates doloremque mollitia adipisci vero ea delectus dolor nulla aliquid? Sapiente odit magnam eveniet eius est enim natus impedit soluta itaque!
-					div.box-item.item-6 6  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, voluptates doloremque mollitia adipisci vero ea delectus dolor nulla aliquid? Sapiente odit magnam eveniet eius est enim natus impedit soluta itaque!
+					div.box-item.item-1.my_div 1  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia id, obcaecati nostrum sequi quas recusandae ratione suscipit praesentium voluptates, quisquam repellat et? Aperiam perferendis eum quod quo praesentium, quisquam rem!
+					a.btn_black.btn_size 2  Lorem ipsum dolor sit amet
+					div.box-item.item-2.btn 2  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, corrupti, assumenda. Debitis ut perferendis sapiente id ad eligendi iure dolore consequatur ducimus delectus! Illo facilis odit, a repudiandae hic nam.
+					div.box-item.item-2.notice 2  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, corrupti, assumenda. Debitis ut perferendis sapiente id ad eligendi iure dolore consequatur ducimus delectus! Illo facilis odit, a repudiandae hic nam.
+					div.box-item.item-3 3  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia id, obcaecati nostrum sequi quas recusandae ratione suscipit praesentium voluptates, quisquam repellat et? Aperiam perferendis eum quod quo praesentium, quisquam rem!
+					div.box-item.item-3 3  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia id, obcaecati nostrum sequi quas recusandae ratione suscipit praesentium voluptates, quisquam repellat et? Aperiam perferendis eum quod quo praesentium, quisquam rem!
+					
 
 
 		// - - - - - - - - - - - - - End of something_container - - - - - - - - - - - - - - - - 

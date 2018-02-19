@@ -1,82 +1,65 @@
 /*====>>  Stylesheet Guide START  <<====*/
-
 /*<<=========================================>>
 
         1. IMPORT Plugins and other CSS files
         2. DEFAULT Stylesheets
         3. BASIC classes
-            3.1.      TOUCH hacks
-            3.2.      Float:;
-            3.3.      Text-align:;
-            3.4.      INDENTS Zero
-            3.5.      Absolute positions
-            3.6.      Clearfix
-            3.7.      Dispay:;
-            3.8.      LINKS
-            3.9.      LINKS:hover
-            3.10.     TITLES
-            3.11.     BACKGROUNDS
-            3.12.     COLORS
-            3.13.     FONTS
-            3.14.     TEXTAFIELD (placeholder animation)
-            3.15.     BREADCRUMBS
-            3.16.     PRELOADER
-            3.17.     ANCHOR TO TOP
+            3.1.      Float:;
+            3.2.      Text-align:;
+            3.3.      INDENTS Zero
+            3.4.      Position :;
+            3.5.      Clearfix
+            3.6.      Dispay:;
+            3.7.      LINKS
+            3.8.      TITLES
+            3.9.      FONTS
+            3.10.     TEXTAFIELD
+            3.11.     BREADCRUMBS
+            3.12.     PRELOADER
+            3.13.     ANCHOR TO TOP
         4. HEADER
         5. CONTENT
         6. FOOTER 
         
         <<=========================================>>*/
-
 /*====>>  Stylesheet Guide END    <<====*/
-
 /*  <!-- 1. IMPORT Plugins and other CSS files 
 ============================================ --> */
+@font-face {
+  font-family: 'SF UI Display Med';
+  src: url("../fonts/SFUIDisplay-Medium.eot");
+  src: url("../fonts/SFUIDisplay-Medium.eot?#iefix") format("embedded-opentype"), url("../fonts/SFUIDisplay-Medium.woff2") format("woff2"), url("../fonts/SFUIDisplay-Medium.woff") format("woff"), url("../fonts/SFUIDisplay-Medium.ttf") format("truetype"), url("../fonts/SFUIDisplay-Medium.otf") format("opentype"), url("../fonts/SFUIDisplay-Medium.svg#SFUIDisplay-Medium") format("svg");
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  unicode-range: U+0020-0491;
+}
 
 /*  <!-- 2. DEFAULT Stylesheets 
 ============================================ --> */
-
-html,
-body {
+html, body {
   width: 100%;
   height: 100%;
 }
 
+.page_wrap {
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-height: 100%;
+}
+
 body {
-  font-family: 'Proxima Nova Reg It', Arial, Helvetica, sans-serif;
+  font-family: "Proxima Nova Reg It", Arial, Helvetica, sans-serif;
   font-size: 12px;
-  line-height: inherit;
-  color: #666;
+  line-height: 1.2;
+  color: #000;
+  background: #fff;
   min-width: 320px;
-  background-color: #fff;
-  -webkit-text-size-adjust: none;
-  /* smoothing font start */
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeSpeed;
-  /* smoothing font end */
-  /* scroll for iphone */
-  -webkit-overflow-scrolling: touch;
-  /* scroll for iphone */
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: inline-block;
-}
-
-* {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
 }
 
 /* when you select text is added to a custom style  */
-
-::-moz-selection {
-  color: #fff;
-  background-color: #0066cc;
-}
-
 ::selection {
   color: #fff;
   background-color: #0066cc;
@@ -88,9 +71,7 @@ img {
 }
 
 /* !!! */
-
 /* custom style to scroll (only in chrome) */
-
 ::-webkit-scrollbar {
   background: #e2e2e2;
   width: 10px;
@@ -101,17 +82,6 @@ img {
 }
 
 /* !!! */
-
-hr {
-  border: none;
-  border-top: 1px solid #888;
-  margin: 0;
-}
-
-.container {
-  max-width: 100%;
-}
-
 .detect_scroll_width {
   position: absolute;
   top: -9999px;
@@ -122,32 +92,7 @@ hr {
 
 /*  <!-- 3. BASIC classes
 ============================================ --> */
-
-/*==========>>  3.1.      TOUCH hacks   <<==========*/
-
-input {
-  -webkit-appearance: none;
-  outline: none;
-}
-
-input[type="checkbox"] {
-  -webkit-appearance: checkbox;
-}
-
-input[type="radio"] {
-  -webkit-appearance: radio;
-}
-
-textarea,
-button {
-  -webkit-appearance: none;
-  -webkit-border-radius: 0;
-  border-radius: 0;
-  outline: none;
-}
-
-/*==========>>  3.2.      Float:;   <<==========*/
-
+/*==========>>  3.1.      Float:;   <<==========*/
 .f_left {
   float: left;
 }
@@ -156,8 +101,11 @@ button {
   float: right;
 }
 
-/*==========>>  3.3.      Text-align:;   <<==========*/
+.f_none {
+  float: none;
+}
 
+/*==========>>  3.2.      Text-align:;   <<==========*/
 .al_left {
   text-align: left;
 }
@@ -170,8 +118,11 @@ button {
   text-align: center;
 }
 
-/*==========>>  3.4.      INDENTS Zero   <<==========*/
+.al_justify {
+  text-align: justify;
+}
 
+/*==========>>  3.3.      INDENTS Zero   <<==========*/
 .m_t_zero {
   margin-top: 0 !important;
 }
@@ -204,8 +155,7 @@ button {
   padding-left: 0 !important;
 }
 
-/*==========>>  3.5.      Absolute positions   <<==========*/
-
+/*==========>>  3.4.      Position :;   <<==========*/
 .p_abs {
   position: absolute;
 }
@@ -236,8 +186,7 @@ button {
   z-index: 9;
 }
 
-/*==========>>  3.6.      Clearfix   <<==========*/
-
+/*==========>>  3.5.      Clearfix   <<==========*/
 .clear {
   clear: both;
   width: 100%;
@@ -245,8 +194,7 @@ button {
   font-size: 0;
 }
 
-.clearfix:after,
-.container:after {
+.clearfix:after {
   content: "";
   display: block;
   height: 0;
@@ -258,8 +206,7 @@ button {
   overflow: hidden;
 }
 
-/*==========>>  3.7.      Dispay:;   <<==========*/
-
+/*==========>>  3.6.      Dispay:;   <<==========*/
 .d_block {
   display: block;
 }
@@ -284,74 +231,182 @@ button {
   display: table-cell;
 }
 
-/*==========>>  3.8.      LINKS   <<==========*/
+.d_f {
+  display: flex;
+}
 
+.d_if {
+  display: inline-flex;
+}
+
+.jc-center {
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.jc-start {
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+
+.jc-end {
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+}
+
+.justify-content-between,
+.jc-between {
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+
+.jc-around {
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+}
+
+.jc-around {
+  -webkit-justify-content: space-evenly;
+  justify-content: space-evenly;
+}
+
+.al-it-start {
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+}
+
+.al-it-end {
+  -webkit-align-items: flex-end;
+  align-items: flex-end;
+}
+
+.align-items-center,
+.al-it-center {
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.al-it-baseline {
+  -webkit-align-items: baseline;
+  align-items: baseline;
+}
+
+.al-it-stretch {
+  -webkit-align-items: stretch;
+  align-items: stretch;
+}
+
+.al-s-auto {
+  -webkit-align-self: auto;
+  align-self: auto;
+}
+
+.al-s-start {
+  -webkit-align-self: flex-start;
+  align-self: flex-start;
+}
+
+.al-s-end {
+  -webkit-align-self: flex-end;
+  align-self: flex-end;
+}
+
+.al-s-center {
+  -webkit-align-self: center;
+  align-self: center;
+}
+
+.al-s-baseline {
+  -webkit-align-self: baseline;
+  align-self: baseline;
+}
+
+.al-s-stretch {
+  -webkit-align-self: stretch;
+  align-self: stretch;
+}
+
+.al-c-start {
+  -webkit-align-content: flex-start;
+  align-content: flex-start;
+}
+
+.al-c-end {
+  -webkit-align-content: flex-end;
+  align-content: flex-end;
+}
+
+.al-c-center {
+  -webkit-align-content: center;
+  align-content: center;
+}
+
+.al-c-between {
+  -webkit-align-content: space-between;
+  align-content: space-between;
+}
+
+.al-c-around {
+  -webkit-align-content: space-around;
+  align-content: space-around;
+}
+
+.al-c-stretch {
+  -webkit-align-content: stretch;
+  align-content: stretch;
+}
+
+/*==========>>  3.7.      LINKS   <<==========*/
 * a,
 * button {
-  cursor: pointer;
-  border: none;
-  text-transform: none;
-  text-decoration: none;
-  outline: none !important;
-  background-color: transparent;
-  display: inline-block;
-  -webkit-border-radius: 0;
-  border-radius: 0;
+  -webkit-transition: all 0.7s ease;
+  -moz-transition: all 0.7s ease;
+  -ms-transition: all 0.7s ease;
+  -o-transition: all 0.7s ease;
+  transition: all 0.7s ease;
+}
+
+* a:hover,
+  * button:hover {
+  -webkit-transition: all 0.1s ease;
+  -moz-transition: all 0.1s ease;
+  -ms-transition: all 0.1s ease;
+  -o-transition: all 0.1s ease;
+  transition: all 0.1s ease;
 }
 
 [data-popup] {
   cursor: pointer;
 }
 
-[class*="btn_"] {
-  font-size: 16px;
-  line-height: 18px;
+[class^="btn_"] {
+  padding: 10px;
+  font-size: 15px;
+  line-height: 17px;
   text-align: center;
-  -webkit-border-radius: 0px;
-  border-radius: 0px;
-  text-decoration: none;
 }
 
-[data-btn-size="m"] {
-  padding: 10px;
+.btn_size {
+  padding: 15px;
+  line-height: 20px;
 }
 
 .btn_black {
-  border: 2px solid #000;
-  background-color: transparent;
+  background-color: #000;
+  color: #fff;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #000;
 }
 
 .btn_black:hover {
-  border: 2px solid #000;
-  background-color: #000;
+  background-color: #fff;
   color: #000;
+  border-color: #000;
 }
 
-/*==========>>  3.9.     LINKS:hover   <<==========*/
-
-a,
-button {
-  -webkit-transition: all 0.7s ease;
-  -o-transition: all 0.7s ease;
-  transition: all 0.7s ease;
-}
-
-a:hover,
-button:hover {
-  -webkit-transition: all 0.1s ease;
-  -o-transition: all 0.1s ease;
-  transition: all 0.1s ease;
-}
-
-/*==========>>  3.10.     TITLES   <<==========*/
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: normal;
+/*==========>>  3.8.     TITLES   <<==========*/
+h1, h2, h3, h4, h5, h6 {
   margin-bottom: 20px;
 }
 
@@ -379,77 +434,19 @@ h6 {
   font-size: 16px;
 }
 
-/*==========>>  3.11.     BACKGROUNDS   <<==========*/
-
-.bg_black {
-  background-color: #000;
+/*==========>>  3.9.     FONTS   <<==========*/
+.proxima {
+  font-family: "Proxima Nova Reg It", Arial, Helvetica, sans-serif;
 }
 
-.bg_white {
-  background-color: #fff;
-}
-
-/*==========>>  3.12.     COLORS   <<==========*/
-
-.white {
-  color: #FFF;
-}
-
-.black {
-  color: #000;
-}
-
-/*==========>>  3.13.     FONTS   <<==========*/
-
-.roboto_thn,
-.roboto_lt,
-.roboto_reg,
-.roboto_med,
-.roboto_bd,
-.roboto_ultra_bd {
-  font-family: 'Roboto', sans-serif;
-}
-
-.roboto_thn {
-  font-weight: 100;
-}
-
-.roboto_lt {
-  font-weight: 300;
-}
-
-.roboto_reg {
-  font-weight: 400;
-}
-
-.roboto_med {
-  font-weight: 500;
-}
-
-.roboto_bd {
-  font-weight: 700;
-}
-
-.roboto_ultra_bd {
-  font-weight: 900;
-}
-
-/*==========>>  3.14.     TEXTAFIELD (placeholder animation)   <<==========*/
-
+/*==========>>  3.10.     TEXTAFIELD   <<==========*/
 /*===  input  ===*/
-
-input.invalid,
-textarea.invalid,
-.jq-selectbox.invalid .jq-selectbox__select {
-  border: 2px solid red;
-}
-
 input:not(:placeholder-shown) {
-  /** input is not empty */
+  /** input is not empty */;
 }
 
 input:placeholder-shown {
-  /** input is empty */
+  /** input is empty */;
 }
 
 .error_message {
@@ -459,102 +456,67 @@ input:placeholder-shown {
   left: 0;
 }
 
-input::-webkit-input-placeholder {
-  -webkit-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-  color: inherit;
-}
-
-input::-moz-placeholder {
-  -webkit-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-  color: inherit;
-}
-
-input:-moz-placeholder {
-  -webkit-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-  color: inherit;
-}
-
-input:-ms-input-placeholder {
-  -webkit-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-  color: inherit;
-}
-
-/* focus  */
-
-input:focus::-webkit-input-placeholder {
-  color: transparent;
-}
-
-input:focus::-moz-placeholder {
-  color: transparent;
-}
-
-input:focus:-moz-placeholder {
-  color: transparent;
-}
-
-input:focus:-ms-input-placeholder {
-  color: transparent;
-}
-
-/*===  textarea   ===*/
-
-textarea::-webkit-input-placeholder {
-  -webkit-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-  color: inherit;
-}
-
-textarea::-moz-placeholder {
-  -webkit-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-  color: inherit;
-}
-
+input:-moz-placeholder,
 textarea:-moz-placeholder {
   -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
   color: inherit;
 }
 
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  color: inherit;
+}
+
+input:-ms-input-placeholder,
 textarea:-ms-input-placeholder {
   -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
   color: inherit;
 }
 
-/* focus  */
-
-textarea:focus::-webkit-input-placeholder {
-  color: transparent;
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  color: inherit;
 }
 
-textarea:focus::-moz-placeholder {
-  color: transparent;
-}
-
+input:focus:-moz-placeholder,
 textarea:focus:-moz-placeholder {
   color: transparent;
 }
 
+input:focus::-moz-placeholder,
+textarea:focus::-moz-placeholder {
+  color: transparent;
+}
+
+input:focus:-ms-input-placeholder,
 textarea:focus:-ms-input-placeholder {
   color: transparent;
 }
 
-/*==========>>  3.15.     BREADCRUMBS   <<==========*/
+input:focus::-webkit-input-placeholder,
+textarea:focus::-webkit-input-placeholder {
+  color: transparent;
+}
 
+/*==========>>  3.11.     BREADCRUMBS   <<==========*/
 .breadcrumbs_container {
   background-color: #ff6633;
 }
@@ -562,7 +524,7 @@ textarea:focus:-ms-input-placeholder {
 .breadcrumbs {
   display: block;
   list-style: none;
-  margin: 24px 0 24px 0;
+  margin: 10px 0;
 }
 
 .breadcrumbs_it {
@@ -581,9 +543,9 @@ textarea:focus:-ms-input-placeholder {
   color: #fff;
   font-size: 20px;
   line-height: 20px;
-  /* background: url(../images/icon_breadcrumbs.png) 0 0 no-repeat; */
-  /* width: 6px;
-                            height: 6px; */
+      /* background: url(../images/icon_breadcrumbs.png) 0 0 no-repeat; */
+      /* width: 6px;
+                            height: 6px; */;
 }
 
 .breadcrumbs_it a {
@@ -610,8 +572,7 @@ textarea:focus:-ms-input-placeholder {
   color: #fff;
 }
 
-/*==========>>  3.16.     PRELOADER   <<==========*/
-
+/*==========>>  3.12.     PRELOADER   <<==========*/
 #page-preloader {
   position: fixed;
   left: 0;
@@ -632,7 +593,6 @@ textarea:focus:-ms-input-placeholder {
   margin-left: -17.5px;
   display: inline-block;
   padding: 0px;
-  -webkit-border-radius: 100%;
   border-radius: 100%;
   border: 2px solid;
   border-top-color: rgba(0, 0, 0, 0.65);
@@ -645,12 +605,10 @@ textarea:focus:-ms-input-placeholder {
 
 @keyframes preloader {
   from {
-    -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
 
   to {
-    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
@@ -665,8 +623,7 @@ textarea:focus:-ms-input-placeholder {
   }
 }
 
-/*==========>>  3.17.     ANCHOR TO TOP   <<==========*/
-
+/*==========>>  3.13.     ANCHOR TO TOP   <<==========*/
 .back_to_top {
   border: none;
   outline: none;
@@ -675,7 +632,6 @@ textarea:focus:-ms-input-placeholder {
   right: 20px;
   width: 50px;
   height: 50px;
-  -webkit-border-radius: 5px;
   border-radius: 5px;
   text-align: center;
   color: #fff;
@@ -700,9 +656,8 @@ textarea:focus:-ms-input-placeholder {
 
 /*  <!-- 4. HEADER 
 ============================================ --> */
-
 #header {
-  background-color: blue;
+  background-color: red;
 }
 
 .logo > a {
@@ -727,22 +682,35 @@ textarea:focus:-ms-input-placeholder {
 
 /*  <!-- 5. CONTENT 
 ============================================ --> */
-
 #content {
-  padding: 0px;
+  flex: 1 0 auto;
+}
+
+[class*="indent_box"] {
+  padding-top: 60px;
+  padding-bottom: 87px;
+}
+
+.indent_box_2 {
+  padding-top: 35px;
+}
+
+.something_container {
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
 }
 
 /* - - - - - - - - - - first screen - - - - - - - - - - */
-
 /* - - - - - - - - - -/ end of first screen - - - - - - - - - - */
-
 /* - - - - - - - - - - second screen - - - - - - - - - - */
-
 /* - - - - - - - - - -/ end of second screen - - - - - - - - - - */
-
 /* - - - - - - - - - - third screen - - - - - - - - - - */
-
 /* - - - - - - - - - -/ end of third screen - - - - - - - - - - */
-
 /*  <!-- 6. FOOTER 
 ============================================ --> */
+#footer {
+  flex: 0 0 auto;
+}

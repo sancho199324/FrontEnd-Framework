@@ -1,0 +1,59 @@
+extends ../pug/templates/main
+
+block vars
+	- var title = "Внутренняя страница";
+	- var headerClasses = ['header2'];
+	- var footerClasses = ['footer2'];
+
+//- block title
+//- 	| Внутренняя страница
+
+
+//- Content Start     ============================================ 
+
+
+block content
+
+	// Content Start     ============================================ 
+
+	main#content
+
+		// - - - - - - - - - - - - - something_container - - - - - - - - - - - - - - - - 
+
+		section(class="something_container")
+			div.container
+				a( href="#" data-popup="#box-modal" style=" font-family: 'Raleway';") Popup
+				
+				div.box
+					div.box-item.item-1 1  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia id, obcaecati nostrum sequi quas recusandae ratione suscipit praesentium voluptates, quisquam repellat et? Aperiam perferendis eum quod quo praesentium, quisquam rem!
+					div.box-item.item-2.notice 2  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, corrupti, assumenda. Debitis ut perferendis sapiente id ad eligendi iure dolore consequatur ducimus delectus! Illo facilis odit, a repudiandae hic nam.
+					div.box-item.item-2.notice 2  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, corrupti, assumenda. Debitis ut perferendis sapiente id ad eligendi iure dolore consequatur ducimus delectus! Illo facilis odit, a repudiandae hic nam.
+
+
+
+		// - - - - - - - - - - - - - End of something_container - - - - - - - - - - - - - - - - 
+
+	// Content End       ============================================ 
+
+
+//- Content End       ============================================ 
+
+
+
+//- Popup Start     ============================================ 
+
+
+block popup
+
+	// Popup Start     ============================================ 
+
+	div(class="d_none")
+		
+		div(class="arcticmodal_container_box" id="box-modal")
+			div(class="arcticmodal-close") &times; 
+			p Поздравляем! Заявка отправлена
+
+	// Popup End       ============================================ 
+
+
+//- Popup End       ============================================ 

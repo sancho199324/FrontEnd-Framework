@@ -1,71 +1,80 @@
 /*  <!-- RESPONSIVE
 ============================================ --> */
-
 /* <!-- minw start
 	============================================ --> */
-
-@media only screen and (min-width: 992px) {
-  .test {
+@media only screen and (min-width: 480px) {
+  .text {
     display: block;
   }
 }
 
-/* <!-- $minw992 --> */
-
-/* <!-- $minw768 --> */
-
-@media only screen and (min-width: 480px) {
-  .test {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
+/* <!-- min-width: 480px --> */
+@media only screen and (min-width: 576px) {
+  .text {
+    display: block;
   }
 }
 
-/* <!-- $minw480 --> */
+/* <!-- min-width: 576px --> */
+@media only screen and (min-width: 768px) {
+  .text {
+    display: block;
+  }
+}
 
+/* <!-- min-width: 768px --> */
+@media only screen and (min-width: 992px) {
+  .text {
+    display: block;
+  }
+}
+
+/* <!-- min-width: 992px --> */
+@media only screen and (min-width: 1200px) {
+  .text {
+    display: block;
+  }
+}
+
+/* <!-- min-width: 1200px --> */
 /* <!-- minw end 
 	============================================ --> */
-
 /* <!-- maxw start
 	============================================ --> */
-
 @media only screen and (max-width: 1199px) {
-  .test {
+  .text {
     display: block;
   }
 }
 
-/* <!-- $maxw1199 --> */
-
+/* <!-- max-width: 1199px --> */
 @media only screen and (max-width: 991px) {
-  .test2 {
+  .text {
     display: block;
   }
 }
 
-/* <!-- $maxw991 --> */
-
+/* <!-- max-width: 991px --> */
 @media only screen and (max-width: 767px) {
-  .test3 {
+  .text {
     display: block;
-  }
-
-  body {
-    background: red;
   }
 }
 
-/* <!-- $maxw767 --> */
+/* <!-- max-width: 767px --> */
+@media only screen and (max-width: 575px) {
+  .text {
+    display: block;
+  }
+}
 
+/* <!-- max-width: 575px --> */
 @media only screen and (max-width: 479px) {
-  .test4 {
+  .text {
     display: block;
   }
 }
 
-/* <!-- $maxw479 --> */
-
+/* <!-- max-width: 479px --> */
 /* <!-- maxw end 
 	============================================ --> */
