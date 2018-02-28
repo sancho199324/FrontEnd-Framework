@@ -156,7 +156,7 @@ var path = {
 		
 		gulp.watch([path.src.scssPath], ['scss']); 
 
-		gulp.watch([path.src.pugPath], ['pug']); 
+		gulp.watch([path.src.allPug], ['pug']); 
 
 		gulp.watch([path.src.allJsPath], ['js']); 
 
