@@ -3,7 +3,7 @@
 // Если нужно установить плагины - пробуем установить их с помощью одной стороки которая написана ниже (надеюсь у вас сработает !!!!).
 // npm install gulp gulp-sass gulp-rename gulp-minify-css browser-sync gulp-imagemin gulp-watch gulp-wait gulp-pug gulp-util gulp-autoprefixer del gulp-uglify --save-dev 
 
-
+// test
 //Init Plugins
 var gulp  			= require('gulp'), //npm install --global gulp-cli   ,  npm install --save-dev gulp
 	sass 			= require('gulp-sass'), // npm install gulp-sass --save-dev
